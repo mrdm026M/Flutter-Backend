@@ -24,4 +24,5 @@ require("./passport")(passport);
 
 const PORT = process.env.PORT || "3000";
 
+app.set("port", PORT);
 app.listen(PORT, console.log(`Server running on PORT: ${PORT}`));
