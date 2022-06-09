@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/services/auth_service.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -92,10 +93,30 @@ class _LoginState extends State<Login> {
                                   .login(emailController.text,
                                       passwordController.text)
                                   .then((value) {
-                                if (value.data[0]) {
-                                  token = value.data[1];
-                                  print(token);
+                                if (value.data['success']) {
+                                  token = value.data['token'];
+                                  Fluttertoast.showToast(
+                                    msg: 'Authenticated',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
+                                    fontSize: 16,
+                                  );
                                 }
+                              });
+
+                              AuthService().getUserInfo(token).then((value) {
+                                Fluttertoast.showToast(
+                                  msg: value.data['msg'],
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.green,
+                                  textColor: Colors.white,
+                                  fontSize: 16,
+                                );
                               });
                             },
                             icon: const Icon(Icons.arrow_forward),
