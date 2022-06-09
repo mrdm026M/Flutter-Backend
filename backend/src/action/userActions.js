@@ -81,7 +81,10 @@ const userActions = {
 
       return res.status(200).send({
         success: true,
-        msg: "Hello " + decodeToken.name,
+        body: {
+          name: decodeToken.name,
+          email: decodeToken.email,
+        },
       });
     } else {
       return res.status(403).send({
