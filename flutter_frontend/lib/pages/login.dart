@@ -109,7 +109,7 @@ class _LoginState extends State<Login> {
 
                               AuthService().getUserInfo(token).then((value) {
                                 Fluttertoast.showToast(
-                                  msg: value.data['msg'],
+                                  msg: "Hello ${value.data['body']['name']}",
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.BOTTOM,
                                   timeInSecForIosWeb: 1,
